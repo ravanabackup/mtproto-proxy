@@ -1,0 +1,36 @@
+name: MTProto Monitor
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      
+      - name: Run Checker
+        run: python src/checker.py
+      
+      - name: Generate README
+        run: python src/generate_readme.py
+      
+      - name: Commit
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git add README.md valid_proxy.txt valid_proxy.json
+          git commit -m "🔄 Automatic update" || exit 0
+          
+          git push
