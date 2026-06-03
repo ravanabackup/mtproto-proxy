@@ -1,3 +1,4 @@
+import os
 import asyncio
 import json
 import time
@@ -8,6 +9,8 @@ from models import ProxyInfo
 
 PROBE_TIMEOUT = 2
 CONCURRENCY = 100
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 def parse_proxy(url: str) -> tuple[str, int, str]:
@@ -62,7 +65,7 @@ async def bounded_probe(
 
 
 async def main():
-    with open("../raw_proxy.txt", encoding="utf-8") as file:
+    with open(os.path.join(current_dir, "..", "raw_proxy.txt"), encoding="utf-8") as file:
         proxies = [
             line.strip()
             for line in file
@@ -97,10 +100,10 @@ async def main():
         for p in alive
     ]
 
-    with open("../valid_proxy.json", "w", encoding="utf-8") as file:
+    with open(os.path.join(current_dir, "..", "valid_proxy.json"), "w", encoding="utf-8") as file:
         json.dump(output_json, file, indent=2, ensure_ascii=False)
     
-    with open("../valid_proxy.txt", "w", encoding="utf-8") as file:
+    with open(os.path.join(current_dir, "..", "valid_proxy.txt"), "w", encoding="utf-8") as file:
         for p in alive:
             file.write(p.url + "\n")
 

@@ -1,8 +1,12 @@
+import os
 import json
 from datetime import datetime, UTC
 
 
-with open("../valid_proxy.json", encoding="utf-8") as file:
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+
+with open(os.path.join(current_dir, "..", "valid_proxy.json"), encoding="utf-8") as file:
     valid = json.load(file)
 
 with open("../proxies.txt", encoding="utf-8") as file:
@@ -80,5 +84,5 @@ for proxy in valid[:20]:
         f"| [Connect]({proxy["url"]}) |\n"
     )
 
-with open("../README.md", "w", encoding="utf-8") as file:
+with open(os.path.join(current_dir, "..", "README.md"), "w", encoding="utf-8") as file:
     file.write(readme)
