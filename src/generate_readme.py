@@ -9,7 +9,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(current_dir, "..", "valid_proxy.json"), encoding="utf-8") as file:
     valid = json.load(file)
 
-with open("../proxies.txt", encoding="utf-8") as file:
+with open(os.path.join(current_dir, "..", "raw_proxy.txt"), encoding="utf-8") as file:
     total = len(
         [
             line
