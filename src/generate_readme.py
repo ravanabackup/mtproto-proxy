@@ -70,7 +70,7 @@ This repository provides auto-updating proxies
 for Telegram to help you bypass the messenger's
 restrictions in Russia
 
-Proxies are updated every **30 minutes**, after which
+Proxies are updated every **2 hours**, after which
 tracking is conducted, which you can review below.
 Additionally, below you will find a table with
 the best ones and a link for instant connection
