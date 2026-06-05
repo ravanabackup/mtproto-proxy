@@ -25,5 +25,5 @@ jobs:
           git config user.email github-actions@github.com
 
           git checkout dev
-          git merge origin/main --no-edit
+          git merge origin/main --no-edit -X theirs
           git push origin dev
