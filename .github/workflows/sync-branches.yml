@@ -8,6 +8,7 @@ on:
       - 'raw_proxy.txt'
       - 'valid_proxy.txt'
       - 'valid_proxy.json'
+  workflow_dispatch:
 
 jobs:
   sync-back:
