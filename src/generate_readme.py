@@ -38,7 +38,11 @@ downloading and are located in the files:** 📥
 - 📄 [.JSON](https://github.com/shablin/mtproto-proxy/blob/main/valid_proxy.json) (`valid_proxy.json`) 
 
 > [!WARNING]
-> Only 
+> At the moment, an imprecise method is used to measure latency.
+> This will be fixed in the future.
+> Also note that some proxies may be unavailable in your region
+
+
 ## 📊 Stats
 
 | 🔢 Total | 🟢 Alive | 🔴 Dead | ⚡ Avg. Latency | 📈 Rate |
