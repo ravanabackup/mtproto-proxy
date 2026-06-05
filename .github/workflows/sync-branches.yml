@@ -1,0 +1,28 @@
+name: Sync branches after main branch update
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'raw_proxy.txt'
+      - 'valid_proxy.txt'
+      - 'valid_proxy.json'
+
+jobs:
+  sync-back:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Merge main into dev
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git checkout dev
+          git merge origin/main --no-edit
+          git push origin dev
