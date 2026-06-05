@@ -10,6 +10,9 @@ on:
       - 'valid_proxy.json'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   sync-back:
     runs-on: ubuntu-latest
