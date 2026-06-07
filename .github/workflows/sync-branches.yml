@@ -5,9 +5,9 @@ on:
     branches:
       - main
     paths:
-      - 'raw_proxy.txt'
-      - 'valid_proxy.txt'
-      - 'valid_proxy.json'
+      - 'data/raw_proxy.txt'
+      - 'data/valid_proxy.txt'
+      - 'data/valid_proxy.json'
   workflow_dispatch:
 
 permissions:
