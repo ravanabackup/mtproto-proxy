@@ -32,8 +32,8 @@ class MarkdownReadmeBuilder:
         downloads = (
             "### 📥 Download\n"
             
-            "- 📄 [.TXT](https://github.com/shablin/mtproto-proxy/blob/main/valid_proxy.txt) (`data/valid_proxy.txt`)\n"
-            "- 📄 [.JSON](https://github.com/shablin/mtproto-proxy/blob/main/valid_proxy.json) (`data/valid_proxy.json`)\n\n"
+            "- 📄 [.TXT](https://github.com/shablin/mtproto-proxy/blob/main/data/valid_proxy.txt) (`data/valid_proxy.txt`)\n"
+            "- 📄 [.JSON](https://github.com/shablin/mtproto-proxy/blob/main/data/valid_proxy.json) (`data/valid_proxy.json`)\n\n"
 
             "> [!WARNING]\n"
             "> At the moment, an imprecise method is used to measure latency.\n"
