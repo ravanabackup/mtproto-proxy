@@ -19,7 +19,7 @@ class MarkdownReadmeBuilder:
             "restrictions in Russia 🇷🇺\n\n"
 
             "Proxies are updated every **2 hours**, after which"
-            "tracking is conducted, which you can review below."
+            "tracking is conducted, which you can review below. "
             "Additionally, below you will find a table with"
             "the best ones and a link for instant connection\n\n"
         )
@@ -68,7 +68,7 @@ class MarkdownReadmeBuilder:
         rows = []
         for proxy in valid_data[:limit]:
             rows.append(
-                f"| {proxy['host']} | {proxy['latency_ms']} | [Connect]{proxy['url']} |"
+                f"| {proxy['host']} | {proxy['latency_ms']} | [Connect]({proxy['url']}) |"
             )
 
         table = table_header + "\n".join(rows) + "\n"
