@@ -14,13 +14,13 @@ class MarkdownReadmeBuilder:
             "> [!NOTE]\n"
             f"> **Last Update:** _{datetime.now(UTC).strftime('%Y-%m-%d %H:%M:%S UTC')}_\n\n"
 
-            "This repository provides auto-updating proxies"
-            "for Telegram to help you bypass the messenger's"
+            "This repository provides auto-updating proxies "
+            "for Telegram to help you bypass the messenger's "
             "restrictions in Russia 🇷🇺\n\n"
 
-            "Proxies are updated every **2 hours**, after which"
+            "Proxies are updated every **2 hours**, after which "
             "tracking is conducted, which you can review below. "
-            "Additionally, below you will find a table with"
+            "Additionally, below you will find a table with "
             "the best ones and a link for instant connection\n\n"
         )
 
