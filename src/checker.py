@@ -66,11 +66,11 @@ async def bounded_probe(
 
 async def main():
     with open(os.path.join(current_dir, "..", "raw_proxy.txt"), encoding="utf-8") as file:
-        proxies = [
+        proxies = set(
             line.strip()
             for line in file
             if line.strip()
-        ]
+        )
 
     semaphore = asyncio.Semaphore(CONCURRENCY)
     
