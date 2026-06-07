@@ -1,65 +1,22 @@
 import os
 import json
 from datetime import datetime, UTC
+from models import ProxyMetrics
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
+raw_proxy_path = os.path.join(current_dir, "..", "raw_proxy.txt") 
+valid_proxy_path = os.path.join(current_dir, "..", "valid_proxy.json") 
 
 
-with open(os.path.join(current_dir, "..", "valid_proxy.json"), encoding="utf-8") as file:
-    valid = json.load(file)
-
-with open(os.path.join(current_dir, "..", "raw_proxy.txt"), encoding="utf-8") as file:
-    total = len(
-        [
-            line
-            for line in file
-            if line.strip()
-        ]
-    )
-
-
-alive_count = len(valid)
-dead_count = total - alive_count
-
-avg_latency = (
-    round(
-        sum(
-            p["latency_ms"]
-            for p in valid
-        )
-        / alive_count,
-        2,
-    )
-    if alive_count
-    else 0
-)
-
-fastest = (
-    min(
-        p["latency_ms"]
-        for p in valid
-    )
-    if alive_count
-    else "-"
-)
-
-slowest = (
-    max(
-        p["latency_ms"]
-        for p in valid
-    )
-    if alive_count
-    else "-"
-)
+with open(raw_proxy_path, "r") as raw, open(valid_proxy_path, "r") as valid:
+    stats = ProxyMetrics.calculate_from_files(raw, valid)
 
 updated = datetime.now(
     UTC
 ).strftime(
     "%Y-%m-%d %H:%M:%S UTC"
 )
-
-rate = round((alive_count / total * 100), 1) if total else 0
 
 readme = f"""# MTProto Proxy 🚀🔒
 
@@ -80,18 +37,24 @@ downloading and are located in the files:** 📥
 - 📄 [.TXT](https://github.com/shablin/mtproto-proxy/blob/main/valid_proxy.txt) (`valid_proxy.txt`)
 - 📄 [.JSON](https://github.com/shablin/mtproto-proxy/blob/main/valid_proxy.json) (`valid_proxy.json`) 
 
+> [!WARNING]
+> At the moment, an imprecise method is used to measure latency.
+> This will be fixed in the future.
+> Also note that some proxies may be unavailable in your region
+
+
 ## 📊 Stats
 
 | 🔢 Total | 🟢 Alive | 🔴 Dead | ⚡ Avg. Latency | 📈 Rate |
 | :-:   | :-:   | :-:  | :-:  | :-: |
-|{total}|{alive_count}|{dead_count}|{avg_latency} ms|{rate}%|
+|{stats.total}|{stats.alive_count}|{stats.dead_count}|{stats.avg_latency} ms|{stats.rate}%|
 
 ##  🌐 Top 20 Fastest Proxies
 | 🖥️ Host | ⚡ Latency (ms) | 🔗 Link |
 |---|:---:|---|
 """
 
-for proxy in valid[:20]:
+for proxy in stats.valid[:20]:
     readme += (
         f"| {proxy["host"]} "
         f"| {proxy["latency_ms"]} "
