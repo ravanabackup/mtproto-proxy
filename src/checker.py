@@ -1,16 +1,9 @@
-import os
 import asyncio
-import json
 import time
 
 from urllib.parse import urlparse, parse_qs
 from models import ProxyInfo
-
-
-PROBE_TIMEOUT = 2
-CONCURRENCY = 100
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
+from src import config
 
 
 def parse_proxy(url: str) -> tuple[str, int, str]:
@@ -29,7 +22,7 @@ async def probe(proxy_url: str) -> ProxyInfo:
     try:
         reader, writer = await asyncio.wait_for(
             asyncio.open_connection(host, port),
-            timeout=PROBE_TIMEOUT,
+            timeout=config.PROBE_TIMEOUT,
         )
 
         latency = (time.perf_counter() - start) * 1000
@@ -59,21 +52,13 @@ async def probe(proxy_url: str) -> ProxyInfo:
 async def bounded_probe(
         semaphore: asyncio.Semaphore,
         proxy_url: str,
-):
+) -> ProxyInfo:
     async with semaphore:
         return await probe(proxy_url)
 
 
-async def main():
-    with open(os.path.join(current_dir, "..", "raw_proxy.txt"), encoding="utf-8") as file:
-        proxies = set(
-            line.strip()
-            for line in file
-            if line.strip()
-        )
-
-    semaphore = asyncio.Semaphore(CONCURRENCY)
-    
+async def run_checker(proxies: set[str]) -> list[ProxyInfo]:
+    semaphore = asyncio.Semaphore(config.CONCURRENCY)
     tasks = [
         bounded_probe(semaphore, proxy)
         for proxy in proxies
@@ -81,32 +66,7 @@ async def main():
 
     results = await asyncio.gather(*tasks)
 
-    alive = [
-        proxy
-        for proxy in results
-        if proxy.alive
-    ]
-
+    alive = [p for p in results if p.alive]
     alive.sort(key=lambda x: x.latency_ms)
-
-    output_json = [
-        {
-            "url": p.url,
-            "host": p.host,
-            "port": p.port,
-            "secret": p.secret,
-            "latency_ms": p.latency_ms,
-        }
-        for p in alive
-    ]
-
-    with open(os.path.join(current_dir, "..", "valid_proxy.json"), "w", encoding="utf-8") as file:
-        json.dump(output_json, file, indent=2, ensure_ascii=False)
     
-    with open(os.path.join(current_dir, "..", "valid_proxy.txt"), "w", encoding="utf-8") as file:
-        for p in alive:
-            file.write(p.url + "\n")
-
-
-if __name__ == "__main__":
-    asyncio.run(main=main())
+    return alive
