@@ -1,5 +1,5 @@
-from models import ProxyMetrics
-from render import MarkdownReadmeBuilder
+from src.models import ProxyMetrics
+from src.render import MarkdownReadmeBuilder
 from src import config
 
 
