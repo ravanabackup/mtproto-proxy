@@ -10,7 +10,7 @@ on:
     branches:
       - main
     paths:
-      - 'raw_proxy.txt'
+      - 'data/raw_proxy.txt'
 
 permissions:
   contents: write
@@ -25,18 +25,15 @@ jobs:
         with:
           python-version: "3.14"
       
-      - name: Run Checker
-        run: python src/checker.py
-      
-      - name: Generate README
-        run: python src/generate_readme.py
+      - name: Run
+        run: python main.py
       
       - name: Commit
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          git add README.md valid_proxy.txt valid_proxy.json
+          git add README.md data/valid_proxy.txt data/valid_proxy.json
           git commit -m "🔄 Automatic update" || exit 0
           
           git push
