@@ -2,7 +2,7 @@ import asyncio
 import time
 
 from urllib.parse import urlparse, parse_qs
-from models import ProxyInfo
+from src.models import ProxyInfo
 from src import config
 
 
