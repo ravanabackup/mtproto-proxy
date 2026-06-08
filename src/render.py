@@ -120,6 +120,15 @@ class TelegramMessageBuilder:
         return self
     
 
+    def add_footer(self) -> TelegramMessageBuilder:
+        footer = (
+            "**[GitHub](https://github.com/shablin/mtproto-proxy)** | #mtproto #proxy"
+        )
+
+        self._lines.append(footer)
+
+        return self
+
     # TODO: def add_inline_buttons():
 
     def build(self) -> str:
