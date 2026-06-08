@@ -71,5 +71,28 @@ class TelegramClient:
             return False
 
 
+    def broadcast(
+            self,
+            chat_ids: list[int | str],
+            text: str,
+            parse_mode: str = "Markdown",
+            disable_web_page_preview: bool = True,
+    ):
+        results = {}
+
+        for cid in chat_ids:
+            success = self.send_message(
+                chat_id=chat_ids,
+                text=text,
+                parse_mode=parse_mode,
+                disable_web_page_preview=disable_web_page_preview
+            )
+
+            results[cid] = success
+            logger.info("broadcast finished")
+
+            return results
+        
+
     def close(self):
         self._session.close()
