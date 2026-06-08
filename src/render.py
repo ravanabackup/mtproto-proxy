@@ -105,7 +105,7 @@ class TelegramMessageBuilder:
         metrics_text = (
             f"*Pull stats:*\n\n"
             f"🟢 `{padded_row1_left} 💀 {stats.dead_count}`\n"
-            f"⚡ `{padded_row2_left} 📈 {stats.rate}`\n"
+            f"⚡ `{padded_row2_left} 📈 {stats.rate}%`\n"
         )
 
         self._lines.append(metrics_text)
