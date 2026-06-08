@@ -73,7 +73,7 @@ class TelegramClient:
 
     def broadcast(
             self,
-            chat_ids: list[int | str],
+            chat_ids: list[int | str] | Any,
             text: str,
             parse_mode: str = "Markdown",
             disable_web_page_preview: bool = True,
