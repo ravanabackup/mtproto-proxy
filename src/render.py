@@ -121,3 +121,8 @@ class TelegramMessageBuilder:
     
 
     # TODO: def add_inline_buttons():
+
+    def build(self) -> str:
+        text = "\n".join(self._lines)
+    
+        return text
