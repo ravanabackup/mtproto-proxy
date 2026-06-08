@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import json
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,4 +18,13 @@ CONCURRENCY = 100
 
 
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
+TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
+
+try:
+    TELEGRAM_CHAT_ID = [
+        chat.strip()
+        for chat in TELEGRAM_CHAT_ID.split(',')
+        if chat.strip()
+    ]
+except Exception:
+    raise Exception
