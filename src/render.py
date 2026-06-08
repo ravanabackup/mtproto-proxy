@@ -78,3 +78,46 @@ class MarkdownReadmeBuilder:
     
     def build(self) -> str:
         return "\n".join(self._sections)
+    
+
+class TelegramMessageBuilder:
+    def __init__(self) -> None:
+        self._lines: list[str] = []
+        self._buttons: list[dict] = []
+
+    
+    def add_title(self) -> TelegramMessageBuilder:
+        self._lines.append("🔄 **MTProto Proxy Update**")
+        self._lines.append("")
+        
+        return self
+    
+
+    def add_stats(self, stats: ProxyMetrics) -> TelegramMessageBuilder:
+        metrics_text = (
+            f"**Pull stats:**"
+            f"🟢 **Alive:** `{stats.alive_count}` of `{stats.total}`\n"
+            f"⚡ **Avg. latency:** `{stats.avg_latency}` ms\n"
+            f"📈 **Rate:** `{stats.rate}`"
+        )
+
+        self._lines.append(metrics_text)
+        self._lines.append("")
+
+        return self
+    
+
+    def add_top_links(self, valid_data: list[dict], limit: int = 5) -> TelegramMessageBuilder:
+        if not valid_data:
+            return self
+        
+        self._lines.append(f"🚀 **Top {limit} Fastest Proxies:**")
+        for i, proxy in enumerate(valid_data[:limit], 1):
+            self._lines.append(f"[Server {i}]({proxy['url']})")
+        
+        self._lines.append("")
+
+        return self
+    
+
+    # TODO: def add_inline_buttons():
