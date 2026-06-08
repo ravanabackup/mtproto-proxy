@@ -88,7 +88,7 @@ class TelegramMessageBuilder:
     
     def add_title(self) -> TelegramMessageBuilder:
         self._lines.append("🔄 *MTProto Proxy Update*")
-        self._lines.append("")
+        self._lines.append("\n")
         
         return self
     
