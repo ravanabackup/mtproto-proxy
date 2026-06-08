@@ -14,13 +14,13 @@ class MarkdownReadmeBuilder:
             "> [!NOTE]\n"
             f"> **Last Update:** _{datetime.now(UTC).strftime('%Y-%m-%d %H:%M:%S UTC')}_\n\n"
 
-            "This repository provides auto-updating proxies"
-            "for Telegram to help you bypass the messenger's"
+            "This repository provides auto-updating proxies "
+            "for Telegram to help you bypass the messenger's "
             "restrictions in Russia 🇷🇺\n\n"
 
-            "Proxies are updated every **2 hours**, after which"
+            "Proxies are updated every **2 hours**, after which "
             "tracking is conducted, which you can review below. "
-            "Additionally, below you will find a table with"
+            "Additionally, below you will find a table with "
             "the best ones and a link for instant connection\n\n"
         )
 
@@ -32,8 +32,8 @@ class MarkdownReadmeBuilder:
         downloads = (
             "### 📥 Download\n"
             
-            "- 📄 [.TXT](https://github.com/shablin/mtproto-proxy/blob/main/valid_proxy.txt) (`data/valid_proxy.txt`)\n"
-            "- 📄 [.JSON](https://github.com/shablin/mtproto-proxy/blob/main/valid_proxy.json) (`data/valid_proxy.json`)\n\n"
+            "- 📄 [.TXT](https://github.com/shablin/mtproto-proxy/blob/main/data/valid_proxy.txt) (`data/valid_proxy.txt`)\n"
+            "- 📄 [.JSON](https://github.com/shablin/mtproto-proxy/blob/main/data/valid_proxy.json) (`data/valid_proxy.json`)\n\n"
 
             "> [!WARNING]\n"
             "> At the moment, an imprecise method is used to measure latency.\n"
