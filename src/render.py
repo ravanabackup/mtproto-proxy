@@ -126,7 +126,7 @@ class TelegramMessageBuilder:
         ]
 
         self._lines.append(" • ".join(servers))
-        self._lines.append("")
+        self._lines.append("\n")
 
         return self
     
