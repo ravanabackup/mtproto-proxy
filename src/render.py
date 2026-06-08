@@ -78,3 +78,64 @@ class MarkdownReadmeBuilder:
     
     def build(self) -> str:
         return "\n".join(self._sections)
+    
+
+class TelegramMessageBuilder:
+    def __init__(self) -> None:
+        self._lines: list[str] = []
+        self._buttons: list[dict] = []
+
+    
+    def add_title(self) -> TelegramMessageBuilder:
+        self._lines.append("🔄 *MTProto Proxy Update*")
+        self._lines.append("")
+        
+        return self
+    
+
+    def add_stats(self, stats: ProxyMetrics) -> TelegramMessageBuilder:
+        metrics_text = (
+            f"*Pull stats:*\n\n"
+            f"🟢 `{stats.alive_count}` of `{stats.total}`      💀 `{stats.dead_count}`\n"
+            f"⚡ `{stats.avg_latency}` ms        📈 `{stats.rate}%`\n"
+        )
+
+        self._lines.append(metrics_text)
+        self._lines.append("")
+
+        return self
+    
+
+    def add_top_links(self, valid_data: list[dict], limit: int = 5) -> TelegramMessageBuilder:
+        if not valid_data:
+            return self
+        
+        self._lines.append(f"🚀 *Top {limit} Fastest Proxies:*\n")
+
+        servers = [
+            f"[Server {i}]({proxy['url']})"
+            for i, proxy in enumerate(valid_data[:limit], 1)
+        ]
+
+        self._lines.append(" • ".join(servers))
+        self._lines.append("")
+
+        return self
+    
+
+    def add_footer(self) -> TelegramMessageBuilder:
+        footer = (
+            "[GitHub](https://github.com/shablin/mtproto-proxy) | #mtproto #proxy\n"
+            "_by @mesmerizor_"
+        )
+
+        self._lines.append(footer)
+
+        return self
+
+    # TODO: def add_inline_buttons():
+
+    def build(self) -> str:
+        text = "\n".join(self._lines)
+    
+        return text

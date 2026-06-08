@@ -1,5 +1,6 @@
+import requests
 from src.models import ProxyMetrics
-from src.render import MarkdownReadmeBuilder
+from src.render import MarkdownReadmeBuilder, TelegramMessageBuilder
 from src import config
 
 
@@ -33,6 +34,37 @@ def calculate_metrics(raw_count: int, valid_data: list[dict]) -> ProxyMetrics:
         rate=rate
     )
 
+
+def send_telegram_notification(stats: ProxyMetrics):
+    if not config.TELEGRAM_BOT_TOKEN or not config.TELEGRAM_CHAT_ID:
+        print("[Telegram] Bot is not configured, notification passed")
+        return
+    
+    message = (
+        TelegramMessageBuilder()
+        .add_title()
+        .add_stats(stats)
+        .add_top_links(stats.valid, limit=5)
+        .add_footer()
+        .build()
+    )
+
+    url = f"https://api.telegram.org/bot{config.TELEGRAM_BOT_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": config.TELEGRAM_CHAT_ID,
+        "text": message,
+        "parse_mode": "Markdown",
+        "disable_web_page_preview": True
+    }
+
+    try:
+        response = requests.post(url, json=payload, timeout=10)
+        response.raise_for_status()
+        print("[Telegram] Notification has been sent")
+    except Exception as e:
+        print("[Telegram] Notification send error:", e)
+
+    
 
 def generate_readme(stats: ProxyMetrics):
     readme = (
