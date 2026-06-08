@@ -94,10 +94,18 @@ class TelegramMessageBuilder:
     
 
     def add_stats(self, stats: ProxyMetrics) -> TelegramMessageBuilder:
+        row_width = 14
+
+        row1_left = f"{stats.alive_count} of {stats.total}"
+        row2_left = f"{stats.avg_latency} ms"
+        
+        padded_row1_left = row1_left.ljust(row_width)
+        padded_row2_left = row2_left.ljust(row_width)
+
         metrics_text = (
             f"*Pull stats:*\n\n"
-            f"🟢 `{stats.alive_count}` of `{stats.total}`      💀 `{stats.dead_count}`\n"
-            f"⚡ `{stats.avg_latency}` ms        📈 `{stats.rate}%`\n"
+            f"🟢 `{padded_row1_left} 💀 {stats.dead_count}`\n"
+            f"⚡ `{padded_row2_left} 📈 {stats.rate}%`\n"
         )
 
         self._lines.append(metrics_text)
@@ -118,7 +126,7 @@ class TelegramMessageBuilder:
         ]
 
         self._lines.append(" • ".join(servers))
-        self._lines.append("")
+        self._lines.append("\n")
 
         return self
     
