@@ -60,7 +60,7 @@ class TelegramClient:
 
                 return True
         
-            logger.error(f"telegram says: {response.status_code}")
+            logger.error(f"telegram says: {response.status_code} (cid: {chat_id})")
             error_details = json.dumps(response_data, indent=2, ensure_ascii=False)
             logger.error(f"telegram error details: {error_details}")
 
@@ -78,21 +78,14 @@ class TelegramClient:
             parse_mode: str = "Markdown",
             disable_web_page_preview: bool = True,
     ):
-        results = {}
-
         for cid in chat_ids:
-            success = self.send_message(
-                chat_id=chat_ids,
+            self.send_message(
+                chat_id=cid,
                 text=text,
                 parse_mode=parse_mode,
                 disable_web_page_preview=disable_web_page_preview
             )
 
-            results[cid] = success
-            logger.info("broadcast finished")
-
-            return results
-        
 
     def close(self):
         self._session.close()
