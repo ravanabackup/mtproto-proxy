@@ -19,6 +19,7 @@ async def main():
     print("Generating README...")
     generator.generate_readme(stats)
 
+    generator.send_telegram_notification(stats)
 
 if __name__ == "__main__":
     asyncio.run(main())
