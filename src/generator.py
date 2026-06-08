@@ -44,7 +44,7 @@ def send_telegram_notification(stats: ProxyMetrics):
         TelegramMessageBuilder()
         .add_title()
         .add_stats(stats)
-        .add_top_links(stats.valid, limit=5)
+        .add_top_links(stats.valid, limit=20)
         .add_footer()
         .build()
     )
