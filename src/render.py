@@ -87,7 +87,7 @@ class TelegramMessageBuilder:
 
     
     def add_title(self) -> TelegramMessageBuilder:
-        self._lines.append("🔄 **MTProto Proxy Update**")
+        self._lines.append("🔄 *MTProto Proxy Update*")
         self._lines.append("")
         
         return self
@@ -95,10 +95,9 @@ class TelegramMessageBuilder:
 
     def add_stats(self, stats: ProxyMetrics) -> TelegramMessageBuilder:
         metrics_text = (
-            f"**Pull stats:**"
-            f"🟢 **Alive:** `{stats.alive_count}` of `{stats.total}`\n"
-            f"⚡ **Avg. latency:** `{stats.avg_latency}` ms\n"
-            f"📈 **Rate:** `{stats.rate}`"
+            f"*Pull stats:*\n\n"
+            f"🟢 `{stats.alive_count}` of `{stats.total}`      💀 `{stats.dead_count}`\n"
+            f"⚡ `{stats.avg_latency}` ms        📈 `{stats.rate}%`\n"
         )
 
         self._lines.append(metrics_text)
@@ -111,10 +110,14 @@ class TelegramMessageBuilder:
         if not valid_data:
             return self
         
-        self._lines.append(f"🚀 **Top {limit} Fastest Proxies:**")
-        for i, proxy in enumerate(valid_data[:limit], 1):
-            self._lines.append(f"[Server {i}]({proxy['url']})")
-        
+        self._lines.append(f"🚀 *Top {limit} Fastest Proxies:*\n")
+
+        servers = [
+            f"[Server {i}]({proxy['url']})"
+            for i, proxy in enumerate(valid_data[:limit], 1)
+        ]
+
+        self._lines.append(" • ".join(servers))
         self._lines.append("")
 
         return self
@@ -122,7 +125,8 @@ class TelegramMessageBuilder:
 
     def add_footer(self) -> TelegramMessageBuilder:
         footer = (
-            "**[GitHub](https://github.com/shablin/mtproto-proxy)** | #mtproto #proxy"
+            "[GitHub](https://github.com/shablin/mtproto-proxy) | #mtproto #proxy\n"
+            "_by @mesmerizor_"
         )
 
         self._lines.append(footer)
