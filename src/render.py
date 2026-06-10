@@ -1,5 +1,6 @@
 from datetime import datetime, UTC
 from src.models import ProxyMetrics
+from src.utils import evaluate_proxy_rate
 
 
 class MarkdownReadmeBuilder:
@@ -46,12 +47,13 @@ class MarkdownReadmeBuilder:
     
 
     def add_stats_table(self, stats: ProxyMetrics) -> MarkdownReadmeBuilder:
+        evaluation = evaluate_proxy_rate(stats).value
         table = (
             "## 📊 Stats\n"
             "| 🔢 Total | 🟢 Alive | 🔴 Dead | ⚡ Avg. Latency | 📈 Rate |\n"
             "| :-------: | :------: | :-----: | :-------------: | :------: |\n"
             f"| {stats.total} | {stats.alive_count} |"
-            f"{stats.dead_count} | {stats.avg_latency} ms | {stats.rate}% |"
+            f"{stats.dead_count} | {stats.avg_latency} ms | {stats.rate}% _({evaluation})_ |"
         )
 
         self._sections.append(table)
