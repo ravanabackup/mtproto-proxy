@@ -1,4 +1,3 @@
-import requests
 from src.models import ProxyMetrics
 from src.render import MarkdownReadmeBuilder, TelegramMessageBuilder
 from src import config
@@ -59,7 +58,7 @@ def send_telegram_notification(stats: ProxyMetrics):
             chat_id=config.TELEGRAM_BOT_OWNER_ID,
             text=(
                 f"⚠ *Attention*\n"
-                f"The proxy rate is low at `{stats.rate}%.` _({evaluation.value})_."
+                f"The proxy rate is low at `{stats.rate}%`. _({evaluation.value})_."
                 "Please update the proxy list immediately!"
             )
         )
