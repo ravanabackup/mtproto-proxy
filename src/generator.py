@@ -3,6 +3,7 @@ from src.models import ProxyMetrics
 from src.render import MarkdownReadmeBuilder, TelegramMessageBuilder
 from src import config
 from src.telegram_client import TelegramClient
+from src.utils import evaluate_proxy_rate, ProxyRateEvaluation
 
 
 def calculate_metrics(raw_count: int, valid_data: list[dict]) -> ProxyMetrics:
@@ -51,6 +52,17 @@ def send_telegram_notification(stats: ProxyMetrics):
         chat_ids=config.TELEGRAM_CHAT_ID,
         text=message,
     )
+
+    evaluation = evaluate_proxy_rate(stats)
+    if evaluation == ProxyRateEvaluation.BAD:
+        telegram.send_message(
+            chat_id=config.TELEGRAM_BOT_OWNER_ID,
+            text=(
+                f"⚠ *Attention*\n"
+                f"The proxy rate is low at `{stats.rate}%.` _({evaluation.value})_."
+                "Please update the proxy list immediately!"
+            )
+        )
 
     telegram.close()
 
