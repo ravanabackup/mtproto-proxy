@@ -18,7 +18,7 @@ class MarkdownReadmeBuilder:
             "for Telegram to help you bypass the messenger's "
             "restrictions in Russia 🇷🇺\n\n"
 
-            "Proxies are updated every **2 hours**, after which "
+            "Proxies are updated every **4 hours**, after which "
             "tracking is conducted, which you can review below. "
             "Additionally, below you will find a table with "
             "the best ones and a link for instant connection\n\n"
