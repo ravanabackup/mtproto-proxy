@@ -1,4 +1,3 @@
-import requests
 from src.models import ProxyMetrics
 from src.render import MarkdownReadmeBuilder, TelegramMessageBuilder
 from src import config
