@@ -1,5 +1,5 @@
 from enum import Enum
-from models import ProxyMetrics
+from src.models import ProxyMetrics
 
 
 class ProxyRateEvaluation(Enum):
