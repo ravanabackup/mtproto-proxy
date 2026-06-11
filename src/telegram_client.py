@@ -45,8 +45,10 @@ class TelegramClient:
             "text": text,
             "parse_mode": parse_mode,
             "disable_web_page_preview": disable_web_page_preview,
-            "reply_markup": reply_markup
         }
+
+        if reply_markup:
+            payload["reply_markup"] = reply_markup
 
         try:
             logger.info(f"sending message... (cid: {chat_id})")
