@@ -153,10 +153,10 @@ class TelegramMessageBuilder:
 
         for i, proxy in enumerate(proxies, 1):
             button = {
-                "text": i,
+                "text": f"🔌 {i}",
                 "url": proxy["url"],
                 "style": "success",
-                "icon_custom_emoji_id": 5389118804590604722,
+                #"icon_custom_emoji_id": 5389118804590604722,
             }
 
             current_row.append(button)
