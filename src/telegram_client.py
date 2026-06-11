@@ -37,17 +37,18 @@ class TelegramClient:
             text: str,
             parse_mode: str = "Markdown",
             disable_web_page_preview: bool = True,
+            reply_markup: dict[str, Any] | None = None
     ) -> bool:
         url = f"{self._base_url}/sendMessage"
 
         payload = {
             "text": text,
             "parse_mode": parse_mode,
-            "disable_web_page_preview": disable_web_page_preview
+            "disable_web_page_preview": disable_web_page_preview,
+            "reply_markup": reply_markup
         }
 
         try:
-            logger.info(f"message will be sent to: {chat_id}")
             logger.info(f"sending message... (cid: {chat_id})")
 
             payload["chat_id"] = chat_id
@@ -77,13 +78,15 @@ class TelegramClient:
             text: str,
             parse_mode: str = "Markdown",
             disable_web_page_preview: bool = True,
+            reply_markup: dict[str, Any] | None = None
     ):
         for cid in chat_ids:
             self.send_message(
                 chat_id=cid,
                 text=text,
                 parse_mode=parse_mode,
-                disable_web_page_preview=disable_web_page_preview
+                disable_web_page_preview=disable_web_page_preview,
+                reply_markup=reply_markup
             )
 
 
