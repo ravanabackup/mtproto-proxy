@@ -5,14 +5,7 @@ from requests.exceptions import RequestException
 import logging
 
 
-logger = logging.getLogger("Telegram")
-logging.basicConfig(
-    level=logging.INFO,
-    format=(
-        "%(asctime)s [%(levelname)s]"
-        "[%(name)s]: %(message)s"
-    )
-)
+logger = logging.getLogger("TelegramClient")
 
 
 class TelegramClient:
@@ -82,6 +75,7 @@ class TelegramClient:
             disable_web_page_preview: bool = True,
             reply_markup: dict[str, Any] | None = None
     ):
+        logger.info(f"sending in broadcast mode... (cids: {chat_ids})")
         for cid in chat_ids:
             self.send_message(
                 chat_id=cid,
