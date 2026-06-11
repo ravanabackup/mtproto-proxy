@@ -1,6 +1,9 @@
+import logging
 import os
 from pathlib import Path
-import json
+
+
+logger = logging.getLogger("Config")
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,6 +24,7 @@ TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_BOT_OWNER_ID = os.environ.get("TELEGRAM_BOT_OWNER_ID")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
 
+
 try:
     TELEGRAM_CHAT_ID = [
         chat.strip()
@@ -29,3 +33,11 @@ try:
     ]
 except Exception:
     raise Exception
+
+
+if not TELEGRAM_BOT_TOKEN:
+    logger.warning("env TELEGRAM_BOT_TOKEN not found")
+elif not TELEGRAM_BOT_OWNER_ID:
+    logger.warning("env TELEGRAM_BOT_OWNER_ID not found")
+elif not TELEGRAM_CHAT_ID:
+    logger.warning("env TELEGRAM_CHAT_ID not found")
