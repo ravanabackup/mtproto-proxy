@@ -156,7 +156,7 @@ class TelegramMessageBuilder:
                 "text": i,
                 "url": proxy["url"],
                 "style": "success",
-                "icon_custom_emoji_id": 4967762670104085632,
+                "icon_custom_emoji_id": 5389118804590604722,
             }
 
             current_row.append(button)
