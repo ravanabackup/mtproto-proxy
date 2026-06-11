@@ -12,7 +12,6 @@ async def main():
         print("no raw proxies found")
         return
     
-    print(f"Testing... (found {len(raw_proxies)} unique proxies)")
     alive_proxies = await checker.run_checker(raw_proxies)
 
     storage.save_results(alive_proxies)
@@ -20,9 +19,7 @@ async def main():
     valid_data = storage.load_valid_json()
     stats = generator.calculate_metrics(len(raw_proxies), valid_data)
 
-    print("Generating README...")
     generator.generate_readme(stats)
-
     generator.send_telegram_notification(stats)
 
 if __name__ == "__main__":
