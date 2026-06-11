@@ -63,6 +63,8 @@ def send_telegram_notification(stats: ProxyMetrics):
 
     evaluation = evaluate_proxy_rate(stats)
     if evaluation == ProxyRateEvaluation.BAD:
+        logger.warning(f"low proxy rate detected: {stats.rate}% — {evaluation.value}")
+
         telegram.send_message(
             chat_id=config.TELEGRAM_BOT_OWNER_ID,
             text=(
