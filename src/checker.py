@@ -1,9 +1,13 @@
+import logging
 import asyncio
 import time
 
 from urllib.parse import urlparse, parse_qs
 from src.models import ProxyInfo
 from src import config
+
+
+logger = logging.getLogger("ProxyChecker")
 
 
 def parse_proxy(url: str) -> tuple[str, int, str]:
@@ -58,6 +62,7 @@ async def bounded_probe(
 
 
 async def run_checker(proxies: set[str]) -> list[ProxyInfo]:
+    logger.info(f"testing proxy... ({len(proxies)} unique)")
     semaphore = asyncio.Semaphore(config.CONCURRENCY)
     tasks = [
         bounded_probe(semaphore, proxy)

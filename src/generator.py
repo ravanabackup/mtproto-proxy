@@ -1,3 +1,5 @@
+import logging
+
 from src.models import ProxyMetrics
 from src.render import MarkdownReadmeBuilder, TelegramMessageBuilder
 from src import config
@@ -5,7 +7,12 @@ from src.telegram_client import TelegramClient
 from src.utils import evaluate_proxy_rate, ProxyRateEvaluation
 
 
+logger = logging.getLogger("Generator")
+
+
 def calculate_metrics(raw_count: int, valid_data: list[dict]) -> ProxyMetrics:
+    logger.info("calculating metrics...")
+
     alive_count = len(valid_data)
     dead_count = raw_count - alive_count
 
@@ -56,6 +63,9 @@ def send_telegram_notification(stats: ProxyMetrics):
 
     evaluation = evaluate_proxy_rate(stats)
     if evaluation == ProxyRateEvaluation.BAD:
+        logger.warning(f"low proxy rate detected: {stats.rate}% — {evaluation.value}")
+        logger.info(f"low proxy rate message will be sent to {config.TELEGRAM_BOT_OWNER_ID}")
+
         telegram.send_message(
             chat_id=config.TELEGRAM_BOT_OWNER_ID,
             text=(
@@ -69,6 +79,8 @@ def send_telegram_notification(stats: ProxyMetrics):
 
 
 def generate_readme(stats: ProxyMetrics):
+    logger.info("generating README...")
+
     readme = (
         MarkdownReadmeBuilder()
             .add_header()
