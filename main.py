@@ -1,5 +1,9 @@
 import asyncio
 from src import storage, checker, generator
+from src import logger
+
+
+logger.setup_logger()
 
 
 async def main():
