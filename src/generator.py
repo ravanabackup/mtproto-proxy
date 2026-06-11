@@ -38,18 +38,20 @@ def calculate_metrics(raw_count: int, valid_data: list[dict]) -> ProxyMetrics:
 
 def send_telegram_notification(stats: ProxyMetrics):
     telegram = TelegramClient(token=config.TELEGRAM_BOT_TOKEN)
-    message = (
+    message, keyboard = (
         TelegramMessageBuilder()
         .add_title()
         .add_stats(stats)
-        .add_top_links(stats.valid, limit=20)
+        #.add_top_links(stats.valid, limit=20)
         .add_footer()
+        .add_proxy_keyboard(stats.valid, max_rows=5, cols=4)
         .build()
     )
 
     telegram.broadcast(
         chat_ids=config.TELEGRAM_CHAT_ID,
         text=message,
+        reply_markup=keyboard
     )
 
     evaluation = evaluate_proxy_rate(stats)

@@ -143,9 +143,41 @@ class TelegramMessageBuilder:
 
         return self
 
-    # TODO: def add_inline_buttons():
-
-    def build(self) -> str:
-        text = "\n".join(self._lines)
     
-        return text
+    def add_proxy_keyboard(self, valid_data: list[dict], max_rows: int = 5, cols: int = 4) -> TelegramMessageBuilder:
+        self._buttons = []
+
+        limit = max_rows * cols
+        proxies = valid_data[:limit]
+        current_row = []
+
+        for i, proxy in enumerate(proxies, 1):
+            button = {
+                "text": i,
+                "url": proxy["url"],
+                "style": "success",
+                "icon_custom_emoji_id": 4967762670104085632,
+            }
+
+            current_row.append(button)
+
+            if len(current_row) == cols:
+                self._buttons.append(current_row)
+                current_row = []
+        
+        if current_row:
+            self._buttons.append(current_row)
+        
+        return self
+
+
+    def build(self) -> tuple[str, dict | None]:
+        text = "\n".join(self._lines)
+
+        reply_markup = None
+        if self._buttons:
+            reply_markup = {
+                "inline_keyboard": self._buttons
+            }
+    
+        return text, reply_markup
