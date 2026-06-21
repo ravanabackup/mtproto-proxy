@@ -24,7 +24,7 @@ def fetch_url_sync(url: str, timeout: int = 10) -> str:
 
 async def download_from_provider(url: str) -> set[str]:
     try:
-        logger.info("downloading from provider:", url)
+        logger.info(f"downloading from provider: {url}")
         content = await asyncio.to_thread(fetch_url_sync, url)
         proxies = {
             line.strip()
