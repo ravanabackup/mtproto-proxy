@@ -1,0 +1,11 @@
+# This file contains RAW URLs to MTProto proxy lists.
+# Each line should contain a direct link to a proxy list provider (RAW).
+#
+# Use this file to add provider links
+# for MTProto proxy fetching, for example:
+#
+# https://github.com/shablin/mtproto-proxy/blob/main/data/raw_proxy.txt
+#
+
+
+https://github.com/SoliSpirit/mtproto/blob/master/all_proxies.txt
