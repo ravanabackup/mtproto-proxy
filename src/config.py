@@ -14,6 +14,7 @@ RAW_PROXY_PATH = DATA_DIR / "raw_proxy.txt"
 VALID_PROXY_JSON_PATH = DATA_DIR / "valid_proxy.json"
 VALID_PROXY_TXT_PATH = DATA_DIR / "valid_proxy.txt"
 README_PATH = BASE_DIR / "README.md"
+PROVIDERS_PATH = DATA_DIR / "providers.txt"
 
 
 PROBE_TIMEOUT = 5.0
