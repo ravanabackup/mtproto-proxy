@@ -3,13 +3,28 @@ import logging
 from pathlib import Path
 import urllib.request
 from src import config
-
+from typing import Literal
 
 logger = logging.getLogger("Providers")
 
 
 PROVIDERS_PATH = config.PROVIDERS_PATH
 RAW_PROXY_PATH = config.RAW_PROXY_PATH
+
+
+def write_raw_proxies(
+        entries: set[str],
+        mode: Literal["overwrite", "append"]
+) -> None:
+    file_mode = "w" if mode == "overwrite" else "a"
+    with open(RAW_PROXY_PATH, file_mode, encoding="utf-8") as file:
+        for proxy in sorted(entries):
+            file.write(proxy + "\n")
+    
+    logger.info(
+        f"raw proxy list successfully updated in {mode.upper()} mode: "
+        f"{len(entries)} proxies total"
+    )
 
 
 def fetch_url_sync(url: str, timeout: int = 10) -> str:
@@ -29,7 +44,7 @@ async def download_from_provider(url: str) -> set[str]:
         proxies = {
             line.strip()
             for line in content.splitlines()
-            if line.strip()
+            if line.strip() and not line.startswith("#")
         }
 
         logger.info(f"total extracted {len(proxies)} proxies from {url}")
@@ -39,7 +54,7 @@ async def download_from_provider(url: str) -> set[str]:
         return set()
 
 
-async def aggregate_proxies():
+async def aggregate_proxies(write_mode: Literal["overwrite", "append"] = "overwrite"):
     if not PROVIDERS_PATH.exists():
         logger.warning("providers file not found!")
         return
@@ -69,8 +84,4 @@ async def aggregate_proxies():
         logger.warning("no provider returned proxy links")
         return
     
-    with open(RAW_PROXY_PATH, "w", encoding="utf-8") as file:
-        for proxy in sorted(all_raw_proxies):
-            file.write(proxy + "\n")
-    
-    logger.info(f"raw proxy list successfully updated: {len(all_raw_proxies)} proxies total")
+    write_raw_proxies(all_raw_proxies, mode=write_mode)
