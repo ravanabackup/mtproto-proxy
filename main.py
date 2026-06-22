@@ -14,23 +14,38 @@ def parse_arguments() -> argparse.Namespace:
             "MTProto Proxy Aggregation Tool\n\n"
             "This tool allows you to fetch, "
             "check and validate proxies"
+        ),
+        epilog=(
+            "Notes on write modes:\n"
+            "   --append (-p) can cause the raw proxy file to grow without bound over time\n"
+            "   Duplicates across different runs are possible in append mode\n"
+            "   Run with --overwrite (-o) once to reset/truncate the file if it becomes too large"
         )
     )
 
-    group = parser.add_mutually_exclusive_group(required=True)
-
-    group.add_argument(
-        "-a",
-        "--auto",
-        action="store_true",
-        help="Automatic mode fetches fresh proxies from providers and collect them"
+    providers_group = parser.add_mutually_exclusive_group(required=True)
+    
+    providers_group.add_argument(
+        "-a", "--auto", action="store_true",
+        help="Automatic mode fetches fresh proxies from providers and put it into raw proxy file"
     )
 
-    group.add_argument(
-        "-m",
-        "--manual",
-        action="store_true",
-        help="Manual mode works with raw proxy file that prepared by you"
+    providers_group.add_argument(
+        "-m", "--manual", action="store_true",
+        help="Manual mode works with existing raw proxy file that prepared by you"
+    )
+
+    
+    write_mode_group = parser.add_mutually_exclusive_group(required=False)
+    
+    write_mode_group.add_argument(
+        "-o", "--overwrite", action="store_true",
+        help="Overwrite mode (default) truncates raw proxy file and write fresh entries from scratch"
+    )
+
+    write_mode_group.add_argument(
+        "-p", "--append", action="store_true",
+        help="Append mode preserves file content and append new entries to the end"
     )
 
     return parser.parse_args()
@@ -38,12 +53,16 @@ def parse_arguments() -> argparse.Namespace:
 
 async def main():
     args = parse_arguments()
+    write_mode = "append" if args.append else "overwrite"
 
     if args.auto:
-        logger_.info("Running in automatic mode...")
-        await providers.aggregate_proxies()
+        logger_.info(f"Running in automatic mode... (write_mode: {write_mode})")
+        await providers.aggregate_proxies(write_mode=write_mode)
     elif args.manual:
-        logger_.info("Running in manual mode...")
+        logger_.info(f"Running in manual mode... (write_mode: {write_mode})")
+
+        if args.append:
+            logger_.warning("Append writing mode combined with Manual mode has no effect")
     
     raw_proxies = storage.load_raw_proxies()
     if not raw_proxies:
