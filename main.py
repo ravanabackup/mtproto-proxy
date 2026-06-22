@@ -11,15 +11,15 @@ logger_ = logging.getLogger("System")
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "MTProto Proxy Aggregation Tool\n\n"
+            "MTProto Proxy Aggregation Tool. "
             "This tool allows you to fetch, "
             "check and validate proxies"
         ),
         epilog=(
-            "Notes on write modes:\n"
-            "   --append (-p) can cause the raw proxy file to grow without bound over time\n"
-            "   Duplicates across different runs are possible in append mode\n"
-            "   Run with --overwrite (-o) once to reset/truncate the file if it becomes too large"
+            "Notes on write modes: "
+            "--append (-p) can cause the raw proxy file to grow without bound over time. "
+            "Duplicates across different runs are possible in append mode. "
+            "Run with --overwrite (-o) once to reset/truncate the file if it becomes too large"
         )
     )
 
