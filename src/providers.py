@@ -44,7 +44,7 @@ async def download_from_provider(url: str) -> set[str]:
         proxies = {
             line.strip()
             for line in content.splitlines()
-            if line.strip()
+            if line.strip() and not line.startswith("#")
         }
 
         logger.info(f"total extracted {len(proxies)} proxies from {url}")
