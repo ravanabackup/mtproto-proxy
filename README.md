@@ -1,6 +1,6 @@
 # MTProto Proxy 🌐
 > [!NOTE]
-> **Last Update:** _2026-06-30 10:57:37 UTC_
+> **Last Update:** _2026-06-30 14:21:51 UTC_
 
 This repository provides auto-updating proxies for Telegram to help you bypass the messenger's restrictions in Russia 🇷🇺
 
@@ -19,27 +19,27 @@ Proxies are updated every **4 hours**, after which tracking is conducted, which 
 ## 📊 Stats
 | 🔢 Total | 🟢 Alive | 🔴 Dead | ⚡ Avg. Latency | 📈 Rate |
 | :-------: | :------: | :-----: | :-------------: | :------: |
-| 315 | 243 |72 | 710.1 ms | 77.1% _(Good)_ |
+| 310 | 232 |78 | 627.13 ms | 74.8% _(Good)_ |
 ## 🌐 Top 20 Fastest Proxies
 | 🖥️ Host | ⚡ Latency (ms) | 🔗 Link |
 | -------- | :-------------: | ------- |
-| 159.223.143.213 | 11.01 | [Connect](https://t.me/proxy?server=159.223.143.213&port=1010&secret=3XnnAQIAAQAH8AMDhuJMOt0) |
-| 23.229.66.163 | 75.44 | [Connect](https://t.me/proxy?server=23.229.66.163&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 87.232.111.185 | 75.6 | [Connect](tg://proxy?server=87.232.111.185&port=443&secret=ee3f8a91c2d7e04b6a9f12c5e8370bd4aa786170692e6f7a6f6e2e7275) |
-| 68.183.32.192 | 76.64 | [Connect](https://t.me/proxy?server=68.183.32.192&port=1010&secret=3XnnAQIAAQAH8AMDhuJMOt0) |
-| 191.44.65.127 | 80.28 | [Connect](tg://proxy?server=191.44.65.127&port=443&secret=ee3f8a91c2d7e04b6a9f12c5e8370bd4aa786170692e6f7a6f6e2e7275) |
-| 85.17.89.193 | 82.13 | [Connect](tg://proxy?server=85.17.89.193&port=443&secret=ee76f6583e6b509d946c56287a9ca59dc362726f7773696e672e79616e6465782e636f6d) |
-| 87.229.56.10 | 83.93 | [Connect](https://t.me/proxy?server=87.229.56.10&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 194.77.70.83 | 84.19 | [Connect](https://t.me/proxy?server=194.77.70.83&port=8080&secret=1603010200010001fc030386e24c3add) |
-| 194.77.70.81 | 84.81 | [Connect](https://t.me/proxy?server=194.77.70.81&port=8080&secret=1603010200010001fc030386e24c3add) |
-| 87.229.56.182 | 84.85 | [Connect](https://t.me/proxy?server=87.229.56.182&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 87.229.56.183 | 84.88 | [Connect](https://t.me/proxy?server=87.229.56.183&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 87.229.56.5 | 85.29 | [Connect](https://t.me/proxy?server=87.229.56.5&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 87.229.56.20 | 85.31 | [Connect](https://t.me/proxy?server=87.229.56.20&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 87.229.56.181 | 86.09 | [Connect](https://t.me/proxy?server=87.229.56.181&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 87.229.56.180 | 86.68 | [Connect](https://t.me/proxy?server=87.229.56.180&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 68.209.57.138 | 87.66 | [Connect](https://t.me/proxy?server=68.209.57.138&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 87.248.129.174 | 87.66 | [Connect](https://t.me/proxy?server=87.248.129.174&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 87.248.129.130 | 87.67 | [Connect](https://t.me/proxy?server=87.248.129.130&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 87.248.129.176 | 87.7 | [Connect](https://t.me/proxy?server=87.248.129.176&port=2053&secret=ee1603010200010001fc030386e24c3add7777772e7961686f6f2e636f6d) |
-| 80.241.216.110 | 87.8 | [Connect](tg://proxy?server=80.241.216.110&port=443&secret=eef689b7cd929fdff0e8e8e897fc79ec8f706574726f766963682e7275) |
+| 159.223.143.213 | 62.21 | [Connect](https://t.me/proxy?server=159.223.143.213&port=1010&secret=3XnnAQIAAQAH8AMDhuJMOt0) |
+| 23.229.66.163 | 127.18 | [Connect](https://t.me/proxy?server=23.229.66.163&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 194.77.70.40 | 132.28 | [Connect](https://t.me/proxy?server=194.77.70.40&port=8880&secret=EERighJJvXrFGRMCIMJdCQ) |
+| 87.232.111.185 | 132.62 | [Connect](tg://proxy?server=87.232.111.185&port=443&secret=ee3f8a91c2d7e04b6a9f12c5e8370bd4aa786170692e6f7a6f6e2e7275) |
+| 87.248.129.16 | 133.55 | [Connect](https://t.me/proxy?server=87.248.129.16&port=8443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 87.248.129.179 | 133.73 | [Connect](https://t.me/proxy?server=87.248.129.179&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 68.183.32.192 | 133.83 | [Connect](https://t.me/proxy?server=68.183.32.192&port=1010&secret=3XnnAQIAAQAH8AMDhuJMOt0) |
+| 87.248.129.130 | 133.92 | [Connect](https://t.me/proxy?server=87.248.129.130&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 85.17.89.193 | 134.6 | [Connect](tg://proxy?server=85.17.89.193&port=443&secret=ee76f6583e6b509d946c56287a9ca59dc362726f7773696e672e79616e6465782e636f6d) |
+| 176.65.136.15 | 135.48 | [Connect](https://t.me/proxy?server=176.65.136.15&port=443&secret=FgMBAgABAAH8AwOG4kw63Q==) |
+| 194.77.70.81 | 136.01 | [Connect](https://t.me/proxy?server=194.77.70.81&port=8080&secret=1603010200010001fc030386e24c3add) |
+| 191.44.65.127 | 136.31 | [Connect](tg://proxy?server=191.44.65.127&port=443&secret=ee3f8a91c2d7e04b6a9f12c5e8370bd4aa786170692e6f7a6f6e2e7275) |
+| 87.229.56.15 | 136.91 | [Connect](https://t.me/proxy?server=87.229.56.15&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 87.229.56.180 | 136.94 | [Connect](https://t.me/proxy?server=87.229.56.180&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 87.229.56.6 | 137.58 | [Connect](https://t.me/proxy?server=87.229.56.6&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 194.77.70.83 | 137.83 | [Connect](https://t.me/proxy?server=194.77.70.83&port=8080&secret=1603010200010001fc030386e24c3add) |
+| 87.229.56.182 | 137.95 | [Connect](https://t.me/proxy?server=87.229.56.182&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 91.108.248.230 | 138.03 | [Connect](tg://proxy?server=91.108.248.230&port=443&secret=ee483cb87d2e5a90eeb745841a0f0e940679616e6465782e7275) |
+| 68.209.57.138 | 138.07 | [Connect](https://t.me/proxy?server=68.209.57.138&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 87.248.129.99 | 138.09 | [Connect](https://t.me/proxy?server=87.248.129.99&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
