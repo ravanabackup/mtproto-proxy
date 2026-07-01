@@ -123,7 +123,7 @@ class ProxyCheckerError(BaseError):
 class ProxyConnectionError(ProxyCheckerError):
     """Could not established TCP-connection"""
 
-    def __init__(self, host: str, port: int, reason: int):
+    def __init__(self, host: str, port: int, reason: str):
         super().__init__(
             f"connection failed: {reason}",
             context={"host": host, "port": port, "reason": reason},
