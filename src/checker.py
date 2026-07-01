@@ -6,17 +6,35 @@ from urllib.parse import urlparse, parse_qs
 from src.models import ProxyInfo
 from src import config
 
+from src.exceptions import (
+    InvalidProxyURLError,
+    MissingProxyFieldError,
+    ProxyConnectionError,
+    ProxyTimeoutError,
+    ProxyCheckerError,
+)
+
 
 logger = logging.getLogger("ProxyChecker")
 
 
 def parse_proxy(url: str) -> tuple[str, int, str]:
-    query = parse_qs(urlparse(url).query)
-    return (
-        query["server"][0],
-        int(query["port"][0]),
-        query["secret"][0]
-    )
+    try:
+        parsed = urlparse(url)
+        query = parse_qs(parsed.query)
+    except ValueError as e:
+        raise InvalidProxyURLError(url, str(e)) from e
+    
+    for field in ("server", "port", "secret"):
+        if field not in query or not query[field]:
+            raise MissingProxyFieldError(url, field)
+    
+    try:
+        port = int(query["port"][0])
+    except (ValueError, TypeError) as e:
+        raise InvalidProxyURLError(url, f"port is not int: {e}") from e
+    
+    return query["server"][0], port, query["secret"][0]
 
 
 async def probe(proxy_url: str) -> ProxyInfo:
@@ -28,29 +46,24 @@ async def probe(proxy_url: str) -> ProxyInfo:
             asyncio.open_connection(host, port),
             timeout=config.PROBE_TIMEOUT,
         )
+    except asyncio.TimeoutError as e:
+        raise ProxyTimeoutError(host, port, config.PROBE_TIMEOUT) from e
+    except OSError as e:
+        raise ProxyConnectionError(host, port, str(e)) from e
 
-        latency = (time.perf_counter() - start) * 1000
+    latency = (time.perf_counter() - start) * 1000
 
-        writer.close()
-        await writer.wait_closed()
+    writer.close()
+    await writer.wait_closed()
 
-        return ProxyInfo(
-            url=proxy_url,
-            host=host,
-            port=port,
-            secret=secret,
-            alive=True,
-            latency_ms=round(latency, 2),
-        )
-    except Exception:
-        return ProxyInfo(
-            url=proxy_url,
-            host=host,
-            port=port,
-            secret=secret,
-            alive=False,
-            latency_ms=None,
-        )
+    return ProxyInfo(
+        url=proxy_url,
+        host=host,
+        port=port,
+        secret=secret,
+        alive=True,
+        latency_ms=round(latency, 2),
+    )
 
 
 async def bounded_probe(
@@ -58,7 +71,21 @@ async def bounded_probe(
         proxy_url: str,
 ) -> ProxyInfo:
     async with semaphore:
-        return await probe(proxy_url)
+        try:
+            return await probe(proxy_url)
+        except ProxyCheckerError as e:
+            logger.debug(f"proxy dead: {e}")
+            host, port, secret = parse_proxy(proxy_url)
+            
+            return ProxyInfo(
+                url=proxy_url,
+                host=host,
+                port=port,
+                secret=secret,
+                alive=False,
+                latency_ms=None,
+            )
+
 
 
 async def run_checker(proxies: set[str]) -> list[ProxyInfo]:
