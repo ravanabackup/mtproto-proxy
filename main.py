@@ -2,7 +2,12 @@ import asyncio
 import argparse
 from src import storage, checker, generator, providers, logger
 import logging
-
+from src.exceptions import (
+    BaseError,
+    ConfigError,
+    StorageError,
+    TelegramError,
+)
 
 logger.setup_logger()
 logger_ = logging.getLogger("System")
@@ -52,32 +57,45 @@ def parse_arguments() -> argparse.Namespace:
 
 
 async def main():
-    args = parse_arguments()
-    write_mode = "append" if args.append else "overwrite"
+    try:
+        args = parse_arguments()
+        write_mode = "append" if args.append else "overwrite"
 
-    if args.auto:
-        logger_.info(f"Running in automatic mode... (write_mode: {write_mode})")
-        await providers.aggregate_proxies(write_mode=write_mode)
-    elif args.manual:
-        logger_.info(f"Running in manual mode... (write_mode: {write_mode})")
+        if args.auto:
+            logger_.info(f"Running in automatic mode... (write_mode: {write_mode})")
+            await providers.aggregate_proxies(write_mode=write_mode)
+        elif args.manual:
+            logger_.info(f"Running in manual mode... (write_mode: {write_mode})")
 
-        if args.append:
-            logger_.warning("Append writing mode combined with Manual mode has no effect")
-    
-    raw_proxies = storage.load_raw_proxies()
-    if not raw_proxies:
-        print("no raw proxies found")
-        return
-    
-    alive_proxies = await checker.run_checker(raw_proxies)
+            if args.append:
+                logger_.warning("Append writing mode combined with Manual mode has no effect")
+        
+        raw_proxies = storage.load_raw_proxies()
+        if not raw_proxies:
+            print("no raw proxies found")
+            return
+        
+        alive_proxies = await checker.run_checker(raw_proxies)
 
-    storage.save_results(alive_proxies)
+        storage.save_results(alive_proxies)
 
-    valid_data = storage.load_valid_json()
-    stats = generator.calculate_metrics(len(raw_proxies), valid_data)
+        valid_data = storage.load_valid_json()
+        stats = generator.calculate_metrics(len(raw_proxies), valid_data)
 
-    generator.generate_readme(stats)
-    generator.send_telegram_notification(stats)
+        generator.generate_readme(stats)
+        generator.send_telegram_notification(stats)
+    except ConfigError as e:
+        logger_.critical(f"configuration error: {e}")
+        exit(2)
+    except StorageError as e:
+        logger_.critical(f"storage error: {e}")
+        exit(3)
+    except TelegramError as e:
+        logger_.error(f"telegram error: {e}")
+    except BaseError as e:
+        logger_.exception(f"unexpected error: {e}")
+        exit(1)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
