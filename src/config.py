@@ -1,6 +1,7 @@
 import logging
 import os
 from pathlib import Path
+from src.exceptions import MissingEnvVarError, InvalidConfigValueError
 
 
 logger = logging.getLogger("Config")
@@ -32,13 +33,17 @@ try:
         for chat in TELEGRAM_CHAT_ID.split(',')
         if chat.strip()
     ]
-except Exception:
-    raise Exception
+except Exception as e:
+    raise InvalidConfigValueError(
+        var_name="TELEGRAM_CHAT_ID",
+        value=TELEGRAM_CHAT_ID,
+        reason=str(e),
+    ) from e
 
 
 if not TELEGRAM_BOT_TOKEN:
-    logger.warning("env TELEGRAM_BOT_TOKEN not found")
+    raise MissingEnvVarError("TELEGRAM_BOT_TOKEN")
 elif not TELEGRAM_BOT_OWNER_ID:
-    logger.warning("env TELEGRAM_BOT_OWNER_ID not found")
+    raise MissingEnvVarError("TELEGRAM_BOT_OWNER_ID")
 elif not TELEGRAM_CHAT_ID:
-    logger.warning("env TELEGRAM_CHAT_ID not found")
+    raise MissingEnvVarError("TELEGRAM_CHAT_ID")
