@@ -2,8 +2,15 @@ import asyncio
 import logging
 from pathlib import Path
 import urllib.request
+from urllib.error import URLError, HTTPError
 from src import config
 from typing import Literal
+
+from src.exceptions import (
+    ProviderFetchError,
+    ProviderParseError,
+)
+
 
 logger = logging.getLogger("Providers")
 
@@ -33,25 +40,36 @@ def fetch_url_sync(url: str, timeout: int = 10) -> str:
         headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
     )
 
-    with urllib.request.urlopen(req, timeout=timeout) as response:
-        return response.read().decode("utf-8", errors="ignore")
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            return response.read().decode("utf-8", errors="ignore")
+    except HTTPError as e:
+        raise ProviderFetchError(url, f"HTTP {e.code}") from e
+    except URLError as e:
+        raise ProviderFetchError(url, f"URL error: {e.reason}") from e
+    except TimeoutError as e:
+        raise ProviderFetchError(url, "timeout") from e
     
 
 async def download_from_provider(url: str) -> set[str]:
     try:
         logger.info(f"downloading from provider: {url}")
         content = await asyncio.to_thread(fetch_url_sync, url)
-        proxies = {
-            line.strip()
-            for line in content.splitlines()
-            if line.strip() and not line.startswith("#")
-        }
-
-        logger.info(f"total extracted {len(proxies)} proxies from {url}")
-        return proxies
-    except Exception as e:
-        logger.error("unable to download from", url, e)
+    except ProviderFetchError as e:
+        logger.warning(f"skipping provider {url}: {e}")
         return set()
+    
+    proxies = {
+        line.strip()
+        for line in content.splitlines()
+        if line.strip() and not line.startswith("#")
+    }
+
+    if not proxies:
+        raise ProviderParseError(url, "no proxies extracted")
+    
+    logger.info(f"total extracted {len(proxies)} proxies from {url}")
+    return proxies
 
 
 async def aggregate_proxies(write_mode: Literal["overwrite", "append"] = "overwrite"):
