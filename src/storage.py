@@ -1,26 +1,33 @@
 import json
 import logging
 from src import config
+from src.exceptions import FileReadError, FileWriteError, InvalidStorageDataError
 
 
 logger = logging.getLogger("Storage")
 
 
 def load_raw_proxies() -> set[str]:
-    if not config.RAW_PROXY_PATH.exists():
-        return set()
-    with open(config.RAW_PROXY_PATH, "r", encoding="utf-8") as file:
-        logger.info("loaded raw proxy list")
-        return {line.strip() for line in file if line.strip()}
+    try:
+        with open(config.RAW_PROXY_PATH, "r", encoding="utf-8") as file:
+            logger.info("loaded raw proxy list")
+            return {line.strip() for line in file if line.strip()}
+    except FileNotFoundError as e:
+        raise FileReadError(config.RAW_PROXY_PATH, "file not found") from e
+    except OSError as e:
+        raise FileReadError(config.RAW_PROXY_PATH, str(e)) from e
 
 
 def load_valid_json() -> list[dict]:
-    if not config.VALID_PROXY_JSON_PATH.exists():
-        return []
-    with open(config.VALID_PROXY_JSON_PATH, "r", encoding="utf-8") as file:
-        logger.info("loaded valid proxy list (JSON)")
-        return json.load(file)
-    
+    try:
+        with open(config.VALID_PROXY_JSON_PATH, "r", encoding="utf-8") as file:
+            logger.info("loaded valid proxy list (JSON)")
+            return json.load(file)
+    except FileNotFoundError as e:
+        raise FileReadError(config.VALID_PROXY_JSON_PATH, "file not found") from e
+    except json.JSONDecodeError as e:
+        raise InvalidStorageDataError(config.VALID_PROXY_JSON_PATH, f"JSON decode: {e}") from e
+
 
 def save_results(alive_proxies: list):
     config.DATA_DIR.mkdir(exist_ok=True)
