@@ -1,6 +1,6 @@
 # MTProto Proxy 🌐
 > [!NOTE]
-> **Last Update:** _2026-07-17 02:56:10 UTC_
+> **Last Update:** _2026-07-17 06:20:56 UTC_
 
 This repository provides auto-updating proxies for Telegram to help you bypass the messenger's restrictions in Russia 🇷🇺
 
@@ -19,27 +19,27 @@ Proxies are updated every **4 hours**, after which tracking is conducted, which 
 ## 📊 Stats
 | 🔢 Total | 🟢 Alive | 🔴 Dead | ⚡ Avg. Latency | 📈 Rate |
 | :-------: | :------: | :-----: | :-------------: | :------: |
-| 633 | 222 |411 | 221.9 ms | 35.1% _(Bad)_ |
+| 633 | 220 |413 | 210.94 ms | 34.8% _(Bad)_ |
 ## 🌐 Top 20 Fastest Proxies
 | 🖥️ Host | ⚡ Latency (ms) | 🔗 Link |
 | -------- | :-------------: | ------- |
-| 172.65.132.110 | 1.51 | [Connect](https://t.me/proxy?server=172.65.132.110&port=25565&secret=FgMBAgABAAH8AxOG4kw63Q) |
-| 172.65.105.152 | 1.78 | [Connect](https://t.me/proxy?server=172.65.105.152&port=25565&secret=FgMBAgABAAH8AxOG4kw63Q) |
-| 172.65.158.167 | 2.15 | [Connect](https://t.me/proxy?server=172.65.158.167&port=25565&secret=dd6321048187495dfac59a030220c25d8e) |
-| 172.65.117.172 | 3.04 | [Connect](https://t.me/proxy?server=172.65.117.172&port=22&secret=dd79e344818749bd7ac519130220c25d09) |
-| 172.65.130.177 | 4.96 | [Connect](https://t.me/proxy?server=172.65.130.177&port=25565&secret=FgMBAgABAAH8AxOG4kw63Q) |
-| 104.207.132.97 | 7.85 | [Connect](https://t.me/proxy?server=104.207.132.97&port=443&secret=2c70759d373cdec29881ce19f0d343bd) |
-| 45.32.162.115 | 27.98 | [Connect](https://t.me/proxy?server=45.32.162.115&port=443&secret=4b10d22a2b4bd8d9e32a66b2a0a599a3) |
-| bomberoo.shop | 33.14 | [Connect](https://t.me/proxy?server=bomberoo.shop&port=25565&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 2.telbet.lol | 36.57 | [Connect](https://t.me/proxy?server=2.telbet.lol&port=25565&secret=dd79e7010200010007f0030386e24c3add) |
-| moh.kingproxynewdomailasiatech.ink | 71.09 | [Connect](https://t.me/proxy?server=moh.kingproxynewdomailasiatech.ink&port=25565&secret=FgMBAgABAAH8AxOG4kw63Q) |
-| mc-ssh.t-proxyru.info. | 71.4 | [Connect](https://t.me/proxy?server=mc-ssh.t-proxyru.info.&port=25565&secret=ee104462821249bd7ac519130220c25d0963646e2e79656b74616e65742e636f6d) |
-| 5.78.28.57 | 74.69 | [Connect](https://t.me/proxy?server=5.78.28.57&port=443&secret=7gESNYEyE0VYkUQjM3dhCYdkcm9wYm94LmNvbQ) |
-| moh.telbet.lol | 78.1 | [Connect](https://t.me/proxy?server=moh.telbet.lol&port=25565&secret=dd79e7010200010007f0030386e24c3add) |
-| 198.16.107.91 | 80.49 | [Connect](https://t.me/proxy?server=198.16.107.91&port=443&secret=ee1603010200010001fc030386e24c3add76616e2e6e616a76612e636f6d) |
-| 87.229.100.160 | 82.26 | [Connect](https://t.me/proxy?server=87.229.100.160&port=443&secret=7gAA8A8Pd1VV____9QBuLmltZWRpYS5zdGVhbXBvd2VyZWQuY29t) |
-| 89.38.98.25 | 82.98 | [Connect](https://t.me/proxy?server=89.38.98.25&port=443&secret=ddced2208ce52ba1345a02de78709105ee) |
-| miinecrafto.com | 83.96 | [Connect](https://t.me/proxy?server=miinecrafto.com&port=25565&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
-| 103.161.35.56 | 84.8 | [Connect](https://t.me/proxy?server=103.161.35.56&port=443&secret=3XnnAQIAAQAH8AMDhuJMOt0) |
-| 161.97.167.251 | 86.9 | [Connect](https://t.me/proxy?server=161.97.167.251&port=443&secret=eec14b841016ce9b05f48e9ed7f2d9de9e676f6f676c65617069732e636f6d) |
-| 87.248.129.186 | 87.26 | [Connect](https://t.me/proxy?server=87.248.129.186&port=443&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 172.65.130.177 | 5.65 | [Connect](https://t.me/proxy?server=172.65.130.177&port=25565&secret=FgMBAgABAAH8AxOG4kw63Q) |
+| 172.65.158.167 | 5.97 | [Connect](https://t.me/proxy?server=172.65.158.167&port=25565&secret=dd6321048187495dfac59a030220c25d8e) |
+| 172.65.117.172 | 6.12 | [Connect](https://t.me/proxy?server=172.65.117.172&port=22&secret=dd79e344818749bd7ac519130220c25d09) |
+| 172.65.132.110 | 6.42 | [Connect](https://t.me/proxy?server=172.65.132.110&port=25565&secret=FgMBAgABAAH8AxOG4kw63Q) |
+| 172.65.104.042 | 6.68 | [Connect](https://t.me/proxy?server=172.65.104.042&port=25565&secret=7hYDAQIAAQAB_AMDhuJMOt1iaXNjb3R0aS55ZWt0YW5ldC5jb20) |
+| 172.65.105.152 | 7.26 | [Connect](https://t.me/proxy?server=172.65.105.152&port=25565&secret=FgMBAgABAAH8AxOG4kw63Q) |
+| 104.207.132.97 | 11.93 | [Connect](https://t.me/proxy?server=104.207.132.97&port=443&secret=2c70759d373cdec29881ce19f0d343bd) |
+| 172.65.100.05 | 17.64 | [Connect](https://t.me/proxy?server=172.65.100.05&port=25565&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| 45.32.162.115 | 23.0 | [Connect](https://t.me/proxy?server=45.32.162.115&port=443&secret=4b10d22a2b4bd8d9e32a66b2a0a599a3) |
+| portal.old-but-new.co.uk. | 30.31 | [Connect](https://t.me/proxy?server=portal.old-but-new.co.uk.&port=443&secret=7t3_BeZaaaan_RoooooSH_93ZWIuYmFsZS5haQ%3D%3D) |
+| pizza.telbet.lol | 36.67 | [Connect](https://t.me/proxy?server=pizza.telbet.lol&port=25565&secret=dd79e7010200010007f0030386e24c3add) |
+| 1.telbet.lol | 61.28 | [Connect](https://t.me/proxy?server=1.telbet.lol&port=25565&secret=dd79e7010200010007f0030386e24c3add) |
+| ma.ikco.shop | 68.29 | [Connect](https://t.me/proxy?server=ma.ikco.shop&port=443&secret=7gAA8A8Pd1VV____9QBuLmktLS0tLS1pbi5hcHBjZW50ZXIubXMtLS0tLS0=) |
+| bomberoo.shop | 70.03 | [Connect](https://t.me/proxy?server=bomberoo.shop&port=25565&secret=ee1603010200010001fc030386e24c3add626973636f7474692e79656b74616e65742e636f6d) |
+| portal.old-but-new.co.uk. | 70.16 | [Connect](https://t.me/proxy?server=portal.old-but-new.co.uk.&port=443&secret=7t3_BeZaaaan_RoooooSH_93ZWIuYmFsZS5haQ==) |
+| 5.78.28.57 | 74.97 | [Connect](https://t.me/proxy?server=5.78.28.57&port=443&secret=7gESNYEyE0VYkUQjM3dhCYdkcm9wYm94LmNvbQ) |
+| br.kingproxynewdomailasiatech.ink | 85.71 | [Connect](https://t.me/proxy?server=br.kingproxynewdomailasiatech.ink&port=22&secret=dd79e7010200010007f0030386e24c3add) |
+| 87.229.100.160 | 86.53 | [Connect](https://t.me/proxy?server=87.229.100.160&port=443&secret=7gAA8A8Pd1VV____9QBuLmltZWRpYS5zdGVhbXBvd2VyZWQuY29t) |
+| 198.16.107.91 | 86.53 | [Connect](https://t.me/proxy?server=198.16.107.91&port=443&secret=ee1603010200010001fc030386e24c3add76616e2e6e616a76612e636f6d) |
+| 51.158.202.129 | 87.3 | [Connect](https://t.me/proxy?server=51.158.202.129&port=443&secret=083fe0c452e2407d835537872f097c54) |
